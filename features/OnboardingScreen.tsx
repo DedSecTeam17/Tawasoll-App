@@ -5,6 +5,7 @@ import { SpacerH } from "./CustomComponent/Spacer";
 import PagerView, { PagerViewOnPageSelectedEvent } from "react-native-pager-view";
 import Router from "./utils/Router";
 import MainPage from "./MainPage";
+import SignInScreen from "./auth/SignInScreen";
 
 
 const titles = [
@@ -39,10 +40,9 @@ function OnBoardingScreen({ navigation }: Props) {
     }
   };
   const toSignInPage = () => {
-    new Router(navigation).toAndReplace(MainPage, {});
-
+    new Router(navigation).toAndReplace(SignInScreen, {});
   };
-  const pages = [0,1,2].map((index)=>{
+  const pages = [0, 1, 2].map((index) => {
     return (
       <View key={index} style={[{ backgroundColor: colors[index] }]}>
         <Page index={selectedIndex} onNext={(newIndex: number) => {
@@ -51,8 +51,8 @@ function OnBoardingScreen({ navigation }: Props) {
           toSignInPage();
         }} />
       </View>
-    )
-  })
+    );
+  });
   return (
     <PagerView
       ref={ref}
