@@ -1,8 +1,8 @@
-import React, { Props, useCallback, useEffect } from "react";
+import React, { Props, useCallback, useEffect, useRef } from "react";
 import {
   Alert,
   Button,
-  Image,
+  Image, InteractionManager,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -20,12 +20,14 @@ import { useForm } from "react-hook-form";
 import CustomInput from "../CustomComponent/CustomInput";
 import Router from "../utils/Router";
 import VerificationScreen from "./VerificationScreen";
+import AppColors from "../utils/AppColors";
 
 function SignInScreen(props: Props) {
   const { control, handleSubmit, setValue } = useForm();
   const onSubmit = (data) => {
-    new Router(props.navigation).toAndReplace(VerificationScreen, { phone: data["phone"] });
+    new Router(props.navigation).to(VerificationScreen, { phone: data["phone"] });
   };
+
 
 
   return (
@@ -36,10 +38,7 @@ function SignInScreen(props: Props) {
           <Text style={styles.smallText}>Welcome</Text>
           <SpacerH h={20} />
           <Image style={styles.logo} source={require("./../../assets/images/tawasol_logo.png")} />
-
-
         </View>
-
       </View>
       <View style={styles.bottom}>
         <SpacerH h={20} />
@@ -59,6 +58,8 @@ function SignInScreen(props: Props) {
             <CustomInput
               control={control}
               name={"phone"}
+              showKeyboard={true}
+
             />
             <View style={[{ flex: 1, flexDirection: "column", alignItems: "stretch", marginHorizontal: 10 }]}>
               <View style={[{ flexDirection: "row", marginHorizontal: 10 }]}>
@@ -96,13 +97,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#0a1089",
+    backgroundColor: AppColors.primaryColor,
     flexDirection: "column",
     justifyContent: "space-between",
   },
   header: {
     flex: 5,
-    backgroundColor: "#0a1089",
+    backgroundColor: AppColors.primaryColor,
   },
   headerContent: {
     flex: 1,

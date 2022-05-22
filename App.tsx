@@ -19,6 +19,7 @@ import MainPage from "./features/MainPage";
 import OnBoardingScreen from "./features/OnboardingScreen";
 import SignInScreen from "./features/auth/SignInScreen";
 import VerificationScreen from "./features/auth/VerificationScreen";
+import AppColors from "./features/utils/AppColors";
 
 
 type RootStackParamList = {
@@ -38,7 +39,15 @@ const App = () => {
         <RootStack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="SignInScreen" component={SignInScreen} options={{ headerShown: false }} />
-        <RootStack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
+        <RootStack.Screen name="MainPage" component={MainPage} options={{
+          headerShown : true,
+          headerShadowVisible: false,
+          title: "",
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: AppColors.primaryColor,
+          },
+        }} />
         <RootStack.Screen name="VerificationScreen" component={VerificationScreen}
                           options={{
                             headerShown: true, title: "Verify Phone",

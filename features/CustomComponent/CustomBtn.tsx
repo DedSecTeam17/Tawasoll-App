@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity } from "react-native";
 import React, { Props } from "react";
+import AppColors from "../utils/AppColors";
 
 
 export default function CustomBtn(props: Props) {
@@ -8,7 +9,7 @@ export default function CustomBtn(props: Props) {
       props.onPress();
     }} style={[{
       margin: props.margin??10,
-      backgroundColor: "#3a41e5",
+      backgroundColor: AppColors.primaryColor,
       alignSelf: "stretch",
       height: 50,
       borderRadius: 10,

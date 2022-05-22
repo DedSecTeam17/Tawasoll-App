@@ -15,8 +15,6 @@ export default class Router {
   }
 
   toAndReplace(screenName: React.FC, data: any) {
-    this.navigation.navigate(screenName.name, data);
-
     this.navigation.dispatch(
       StackActions.replace(screenName.name, data),
     );
