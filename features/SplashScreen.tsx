@@ -13,7 +13,7 @@ const logo = require("../assets/images/tawasol_logo.png");
 function SplashScreen({ route, navigation }: Props ) {
   useEffect(() => {
     new Timer(2, (message: string) => {
-      new Router(navigation).toAndReplace(OnBoardingScreen, {});
+      new Router().toAndReplace(OnBoardingScreen, {});
     });
   });
   return (

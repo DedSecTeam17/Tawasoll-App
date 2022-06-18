@@ -1,6 +1,7 @@
-import { TextInput, View } from "react-native";
+import { KeyboardTypeOptions, TextInput, View } from "react-native";
 import React, { Props, useEffect, useRef } from "react";
 import { useController } from "react-hook-form";
+import { AppKeyboardType } from "../utils/KeyBoardType";
 
 
 export default function CustomInput(props: Props) {
@@ -32,8 +33,8 @@ export default function CustomInput(props: Props) {
         value={field.value}
         ref={inputRef}
         onChangeText={field.onChange}
-        keyboardType={"number-pad"}
-        placeholder={"+971-525221632"}
+        keyboardType={AppKeyboardType.default}
+        placeholder={props.placeHolder ?? "+971-525221632"}
       />
     </View>
   );

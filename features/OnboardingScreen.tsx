@@ -40,7 +40,7 @@ function OnBoardingScreen({ navigation }: Props) {
     }
   };
   const toSignInPage = () => {
-    new Router(navigation).toAndReplace(SignInScreen, {});
+    new Router().toAndReplace(SignInScreen, {});
   };
   const pages = [0, 1, 2].map((index) => {
     return (

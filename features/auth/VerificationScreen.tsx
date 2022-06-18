@@ -56,7 +56,7 @@ export default function VerificationScreen(props: Props) {
         </TouchableOpacity>
         <SpacerH h={10} />
         <CustomBtn onPress={() => {
-          new Router(props.navigation).toAndReplace(MainPage, {});
+          new Router().toAndClearStack(MainPage, {});
         }} margin={40} title={"Verify and Create Account"} />
 
       </View>

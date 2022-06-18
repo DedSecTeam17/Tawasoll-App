@@ -1,4 +1,14 @@
-import { Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import React, { Props, useEffect, useState } from "react";
 
@@ -20,9 +30,10 @@ import StoriesFragment from "./TopTabsFragment/StoriesFragment";
 import PrivateFragment from "./TopTabsFragment/PrivateFragment";
 import GroupsFragment from "./TopTabsFragment/GroupsFragment";
 
-function MainPage() {
+function MainPage(props : Props) {
   const [tapIndex, setTapIndex] = useState(0);
-  const fragments = [<AllMessagesFragment />, <StoriesFragment />, <PrivateFragment />,
+  const fragments = [<AllMessagesFragment
+  />, <StoriesFragment />, <PrivateFragment />,
     <GroupsFragment />];
   return (
     <View style={styles.container}>
@@ -62,19 +73,35 @@ function MainPage() {
 }
 
 function TopTaps(props: Props) {
+  const tapsData = [
+    {
+      index: 0,
+      title: "All Messages",
+    },
+    {
+      index: 1,
+      title: "Stories",
+    },
+    {
+      index: 2,
+      title: "Private",
+    },
+    {
+      index: 3,
+      title: "Groups",
+    },
+  ];
   return <View style={[styles.row, { margin: 10 }]}>
-    <TapItem isActive={props.activeIndex === 0} title={"All Messages"} onPress={() => {
-      props.onPress(0);
-    }} />
-    <TapItem isActive={props.activeIndex === 1} title={"Stories"} onPress={() => {
-      props.onPress(1);
-    }} />
-    <TapItem isActive={props.activeIndex === 2} title={"Private"} onPress={() => {
-      props.onPress(2);
-    }} />
-    <TapItem isActive={props.activeIndex === 3} title={"Groups"} onPress={() => {
-      props.onPress(3);
-    }} />
+    <FlatList
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      data={tapsData}
+      renderItem={(item) => (<TapItem isActive={props.activeIndex === item.index} title={item.item["title"]} onPress={() => {
+        props.onPress(item.index);
+      }} />)}
+      keyExtractor={(item) => item["index"]}
+    />
+
   </View>;
 }
 

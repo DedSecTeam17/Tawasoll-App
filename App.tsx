@@ -20,6 +20,9 @@ import OnBoardingScreen from "./features/OnboardingScreen";
 import SignInScreen from "./features/auth/SignInScreen";
 import VerificationScreen from "./features/auth/VerificationScreen";
 import AppColors from "./features/utils/AppColors";
+import ChatScreen from "./features/chat/ChatScreen";
+import { navigationRef } from "./features/utils/Router";
+import { Text } from "react-native";
 
 
 type RootStackParamList = {
@@ -29,18 +32,20 @@ type RootStackParamList = {
   SignInScreen: undefined,
   VerificationScreen: {
     phone: string
-  }
+  },
+  ChatScreen: undefined
 };
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName={"SplashScreen"}>
+    <NavigationContainer ref={navigationRef}>
+      <RootStack.Navigator initialRouteName={"SplashScreen"}
+      >
         <RootStack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="SignInScreen" component={SignInScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="MainPage" component={MainPage} options={{
-          headerShown : true,
+          headerShown: true,
           headerShadowVisible: false,
           title: "",
           headerTintColor: "white",
@@ -57,6 +62,15 @@ const App = () => {
                               backgroundColor: "white",
                             },
                           }} />
+
+
+        <RootStack.Screen name={"ChatScreen"} component={ChatScreen}
+                          options={{
+                            headerShown: false,
+
+
+                          }}
+        />
 
 
       </RootStack.Navigator>

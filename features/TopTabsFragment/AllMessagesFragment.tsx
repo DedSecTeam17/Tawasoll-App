@@ -2,6 +2,8 @@ import React, { Props, useEffect } from "react";
 import { FlatList, Image, ListRenderItemInfo, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppColors from "../utils/AppColors";
 import { SpacerH, SpacerW } from "../CustomComponent/Spacer";
+import Router from "../utils/Router";
+import ChatScreen from "../chat/ChatScreen";
 
 
 class User {
@@ -68,7 +70,10 @@ export default function AllMessagesFragment() {
     <View style={styles.container}>
       <FlatList
         data={users}
-        renderItem={(item: ListRenderItemInfo<User>) => <UserItem user={item.item} index={item.index} />}
+        renderItem={(item: ListRenderItemInfo<User>) => <UserItem user={item.item} onPress={() => {
+          console.log("nav");
+          new Router().to(ChatScreen, {});
+        }} index={item.index} />}
       />
     </View>
   );
@@ -82,7 +87,7 @@ function MessagesIndicator() {
   </View>;
 }
 
-function Status(props : Props) {
+function Status(props: Props) {
   return <View
     style={[{
       backgroundColor: props.online ? "green" : "gray",
@@ -105,12 +110,15 @@ function Status(props : Props) {
 
 function UserItem(props: Props) {
   let user: User = props.user;
-  return <TouchableOpacity style={styles.rowSpaceBeteen}>
+  return <TouchableOpacity onPress={() => {
+    props.onPress();
+  }
+  } style={styles.rowSpaceBeteen}>
     <View style={styles.row}>
       <View style={styles.absolView}>
 
         <Image source={{ uri: user.imageUrl }} style={styles.usertImage} />
-        <Status online={props.index%2=== 0} />
+        <Status online={props.index % 2 === 0} />
       </View>
       <View style={styles.columnFlexStart}>
         <Text style={styles.nameTextStyle}>{user.name}</Text>
